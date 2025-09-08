@@ -101,7 +101,7 @@
 
   <h3 class="section-title">FINANCIAL EXPENSE REPORT (16 July 2023 - 16 November 2025)</h3>
 
-  <table>
+  <table id="expenseTable">
     <thead>
       <tr>
         <th>DATE</th>
@@ -115,49 +115,49 @@
         <td>Sept 2023</td>
         <td>Food & Drinks / Parish Support</td>
         <td>Returning of cooler, Beer drinks, Home transfer (Ezenwaka Remigues Clearance)</td>
-        <td>2,500 + 2,000 + 50,000</td>
+        <td>2500 + 2000 + 50000</td>
       </tr>
 
       <tr>
         <td>Nov 2023</td>
         <td>Parish Support / Food</td>
         <td>Home transfer (Kenechukwu Okeke Clearance), Food money, Annual due, Bazaar expenses</td>
-        <td>50,000 + 14,400 + 6,600 + 2,500</td>
+        <td>50000 + 14400 + 6600 + 2500</td>
       </tr>
 
       <tr>
         <td>Nov 2023</td>
         <td>Harvest & Bazaar</td>
         <td>Bazaar items brought</td>
-        <td>85,000</td>
+        <td>85000</td>
       </tr>
 
       <tr>
         <td>17 Mar 2024</td>
         <td>Drinks</td>
         <td>Malt</td>
-        <td>13,500</td>
+        <td>13500</td>
       </tr>
 
       <tr>
         <td>19 May 2024</td>
         <td>Wedding Expenses</td>
         <td>Gift to Okechukwu Okeke (Envelope, Bible & Rosary)</td>
-        <td>10,400 + 23,000</td>
+        <td>10400 + 23000</td>
       </tr>
 
       <tr>
         <td>19 May 2024</td>
         <td>Burial Expenses</td>
         <td>Support for Uchenna Onyekwere’s mother’s burial + Parish priest support</td>
-        <td>6,000 + 20,000</td>
+        <td>6000 + 20000</td>
       </tr>
 
       <tr>
         <td>21 Jul 2024</td>
         <td>Meeting Food Expenses</td>
         <td>Food and beer</td>
-        <td>6,000</td>
+        <td>6000</td>
       </tr>
 
       <tr>
@@ -169,30 +169,53 @@
           Annual due 2024 <br>
           Visit to catechist
         </td>
-        <td>10,000 + 105,000 + 27,000 + 10,000</td>
+        <td>10000 + 105000 + 27000 + 10000</td>
       </tr>
 
       <tr>
         <td>Dec 2024</td>
         <td>End of Year</td>
         <td>Annual report and home register</td>
-        <td>7,100</td>
+        <td>7100</td>
       </tr>
 
       <tr>
         <td>18 May 2025</td>
         <td>Food & Drinks</td>
         <td>Returning of cooler and beer</td>
-        <td>5,000</td>
+        <td>5000</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="summary">
-    Total Expenses = ₦456,000
-  </div>
+  <div class="summary" id="totalExpenses">Total Expenses = ₦0</div>
 
   <a href="index.html">Go to Income Page</a>
+
+  <script>
+    function calculateTotal() {
+      let table = document.getElementById("expenseTable");
+      let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+      let total = 0;
+
+      for (let row of rows) {
+        let amountCell = row.cells[3];
+        if (amountCell) {
+          // Split values like "5000 + 2000 + 1000"
+          let values = amountCell.innerText.split("+");
+          for (let val of values) {
+            let num = parseInt(val.replace(/[^\d]/g, ""), 10); // remove non-digits
+            if (!isNaN(num)) total += num;
+          }
+        }
+      }
+
+      document.getElementById("totalExpenses").innerText = "Total Expenses = ₦" + total.toLocaleString();
+    }
+
+    // Run on page load
+    window.onload = calculateTotal;
+  </script>
 </body>
 
 </html>
