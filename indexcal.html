@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catholic Youth - Expense Report</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f9f9f9;
+      margin: 20px;
+      color: #333;
+    }
+
+    h2,
+    h3 {
+      text-align: center;
+    }
+
+    h2 span {
+      color: brown;
+    }
+
+    h3 span {
+      color: #0000ff;
+    }
+
+    .section-title {
+      margin-top: 40px;
+      text-align: center;
+      color: red;
+      font-weight: bold;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #444;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    .summary {
+      margin: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: darkred;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      text-decoration: none;
+      color: white;
+      background: #0073e6;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: 0.3s;
+      width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a:hover {
+      background: #005bb5;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>
+    <span>
+      THE COMPREHENSIVE ACCOUNT OF CATHOLIC YOUTH ORGANIZATION OF NIGERIA <br>
+      ST. AUGUSTINE ICHIDA, LAGOS BRANCH <br>
+      PRESENTED THIS DAY - 16 NOVEMBER 2025
+    </span>
+  </h2>
+
+  <h3><span>FOR GOD AND FOR YOUTH! THROUGH CHRIST!</span></h3>
+  <hr>
+
+  <h3 class="section-title">FINANCIAL EXPENSE REPORT (16 July 2023 - 16 November 2025)</h3>
+
+  <table id="expenseTable">
+    <thead>
+      <tr>
+        <th>DATE</th>
+        <th>SOURCE</th>
+        <th>BREAKDOWN</th>
+        <th>AMOUNT (₦)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sept 2023</td>
+        <td>Food & Drinks / Parish Support</td>
+        <td>Returning of cooler, Beer drinks, Home transfer (Ezenwaka Remigues Clearance)</td>
+        <td>2500 + 2000 + 50000</td>
+      </tr>
+
+      <tr>
+        <td>Nov 2023</td>
+        <td>Parish Support / Food</td>
+        <td>Home transfer (Kenechukwu Okeke Clearance), Food money, Annual due, Bazaar expenses</td>
+        <td>50000 + 14400 + 6600 + 2500</td>
+      </tr>
+
+      <tr>
+        <td>Nov 2023</td>
+        <td>Harvest & Bazaar</td>
+        <td>Bazaar items brought</td>
+        <td>85000</td>
+      </tr>
+
+      <tr>
+        <td>17 Mar 2024</td>
+        <td>Drinks</td>
+        <td>Malt</td>
+        <td>13500</td>
+      </tr>
+
+      <tr>
+        <td>19 May 2024</td>
+        <td>Wedding Expenses</td>
+        <td>Gift to Okechukwu Okeke (Envelope, Bible & Rosary)</td>
+        <td>10400 + 23000</td>
+      </tr>
+
+      <tr>
+        <td>19 May 2024</td>
+        <td>Burial Expenses</td>
+        <td>Support for Uchenna Onyekwere’s mother’s burial + Parish priest support</td>
+        <td>6000 + 20000</td>
+      </tr>
+
+      <tr>
+        <td>21 Jul 2024</td>
+        <td>Meeting Food Expenses</td>
+        <td>Food and beer</td>
+        <td>6000</td>
+      </tr>
+
+      <tr>
+        <td>17 Nov 2024</td>
+        <td>Harvest & Bazaar</td>
+        <td>
+          Drinks for meeting <br>
+          Items for harvest & transport <br>
+          Annual due 2024 <br>
+          Visit to catechist
+        </td>
+        <td>10000 + 105000 + 27000 + 10000</td>
+      </tr>
+
+      <tr>
+        <td>Dec 2024</td>
+        <td>End of Year</td>
+        <td>Annual report and home register</td>
+        <td>7100</td>
+      </tr>
+
+      <tr>
+        <td>18 May 2025</td>
+        <td>Food & Drinks</td>
+        <td>Returning of cooler and beer</td>
+        <td>5000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary" id="totalExpenses">Total Expenses = ₦0</div>
+
+  <a href="./index.html">Go to Income Page</a>
+
+  <script>
+    function calculateTotal() {
+      let table = document.getElementById("expenseTable");
+      let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+      let total = 0;
+
+      for (let row of rows) {
+        let amountCell = row.cells[3];
+        if (amountCell) {
+          // Split values like "5000 + 2000 + 1000"
+          let values = amountCell.innerText.split("+");
+          for (let val of values) {
+            let num = parseInt(val.replace(/[^\d]/g, ""), 10); // remove non-digits
+            if (!isNaN(num)) total += num;
+          }
+        }
+      }
+
+      document.getElementById("totalExpenses").innerText = "Total Expenses = ₦" + total.toLocaleString();
+    }
+
+    // Run on page load
+    window.onload = calculateTotal;
+  </script>
+</body>
+
+</html>
